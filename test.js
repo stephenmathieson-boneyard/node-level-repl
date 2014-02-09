@@ -42,6 +42,9 @@ describe('level-repl', function () {
     (function again() {
       if (!--times) return done();
       var repl = spawn('./bin.js', [ '-p', 'testdb', '-e', 'leveldown' ]);
+      repl.stderr.on('data', function () {
+        throw new Error('REPL errored');
+      });
       repl.stdout.on('data', function () {
         repl.kill();
         repl.on('close', again);
