@@ -3,6 +3,10 @@
 
   REPL for LevelUP compatible databases.
 
+## Installation
+
+    $ npm install level-repl -g
+
 ## Usage
 
 ```
