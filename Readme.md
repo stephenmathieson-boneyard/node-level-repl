@@ -3,6 +3,8 @@
 
   REPL for LevelUP compatible databases.
 
+[![Build Status](https://travis-ci.org/stephenmathieson/node-level-repl.png?branch=master)](https://travis-ci.org/stephenmathieson/node-level-repl)
+
 ## Installation
 
     $ npm install level-repl -g
