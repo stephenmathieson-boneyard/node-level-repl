@@ -5,7 +5,7 @@ var levelup = require('levelup');
 exports = module.exports = lrepl;
 
 /**
- * Output availble commands.
+ * Output available commands.
  *
  * @api private
  * @param {String} prefix
