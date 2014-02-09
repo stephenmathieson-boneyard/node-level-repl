@@ -1,0 +1,40 @@
+{
+  "name": "level-repl",
+  "version": "0.0.0",
+  "description": "REPL for LevelUP compatible databases",
+  "keywords": [
+    "level",
+    "levelup",
+    "leveldown",
+    "sophia",
+    "sophist",
+    "repl"
+  ],
+  "author": "Stephen Mathieson <me@stephenmathieson.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stephenmathieson/level-repl.git"
+  },
+  "dependencies": {
+    "levelup": "~0.18.2",
+    "commander": "~2.1.0"
+  },
+  "devDependencies": {
+    "sophist": "~0.2.1",
+    "rimraf": "~2.2.6",
+    "leveldown": "~0.10.2",
+    "mocha": "~1.17.1"
+  },
+  "bin": {
+    "level-repl": "bin.js"
+  },
+  "homepage": "https://github.com/stephenmathieson/level-repl",
+  "scripts": {
+    "test": "make clean test"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stephenmathieson/level-repl/issues"
+  },
+  "main": "index.js"
+}
