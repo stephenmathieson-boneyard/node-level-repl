@@ -25,6 +25,8 @@ exports.help = function (prefix) {
   console.log('    list                   list all key/value pairs');
   console.log('    keys                   list all keys');
   console.log('    clear                  clear all keys');
+  console.log('    export {path}          export all data to the db at path');
+  console.log('    import {path}          import data from the db at path');
   console.log('');
 };
 
@@ -90,6 +92,12 @@ function lrepl(path, engine) {
 
         case 'clear':
           return clear(args, cb);
+
+        case 'export':
+          return _export(args, cb);
+
+        case 'import':
+          return _import(args, cb);
 
         default:
           return cb('unsupported command: "' + cmd + '"');
@@ -161,6 +169,58 @@ function lrepl(path, engine) {
           });
         }(0));
       });
+    }
+
+    /**
+     * Export the db to the db at `path`.
+     */
+
+    function _export(path, cb) {
+      path = normalize(path);
+      var db2 = levelup(path, { db: engine });
+      db2.open(function (err) {
+        if (err) return cb(err);
+        copy(db, db2, cb);
+      });
+    }
+
+    /**
+     * Import the db at `path` to the current db.
+     */
+
+    function _import(path, cb) {
+      path = normalize(path);
+      var db2 = levelup(path, { db: engine });
+      db2.open(function (err) {
+        if (err) return cb(err);
+        copy(db2, db, cb);
+      });
+    }
+
+    /**
+     * Copy `src` db into `dest` db.
+     */
+
+    function copy(src, dest, cb) {
+      var done = false;
+      var read = src.createReadStream({ keys: true, values: true });
+      var write = dest.createWriteStream();
+
+      write
+        .on('error', callback)
+        .on('close', callback);
+
+      read
+        .on('error', callback)
+        .pipe(write);
+
+      function callback(err) {
+        if (done) return;
+        done = true;
+        read.destroy();
+        write.destroy();
+        cb(err);
+      }
     }
 
     /**
