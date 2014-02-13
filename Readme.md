@@ -30,6 +30,8 @@
     list                   list all key/value pairs
     keys                   list all keys
     clear                  clear all keys
+    export {path}          export all data to the db at path
+    import {path}          import data from the db at path
 ```
 
 ## Example
